@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>
-        hakkımızda
-    </h1>
-</body>
-</html>
+{% extends "layout.html" %}
+
+
+{% block css_files %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+{% endblock %}
+
+
+{% block document %}
+    Hakkımızda
+{% endblock%}
+
+
+{% block content %}
+    <h1>Hakkımızda</h1>
+    <i class="fa-solid fa-bug"></i>
+{% endblock%}
+
+
+{% block js_files %}{% endblock %}
+
+
