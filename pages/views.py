@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def home(request):
-    return HttpResponse('anasayfa')
+def index(request):
+    return render(request, 'index.html')
 
-def communication(request):
-    return HttpResponse('iletişim sayfası')
+def contact(request):
+    return render(request, 'contact.html')
 
-def aboutUs(request):
-    return HttpResponse('hakkımızda sayfası')
+def about(request):
+    return render(request, 'about.html')
