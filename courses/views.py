@@ -14,27 +14,31 @@ db = {
         {
             "title": "javascript kursu",
             "description": "javascript kurs açıklaması",
-            "imageUrl": "https://appmaster.io/api/_files/hRaLG2N4DVjRZJQzCpN2zJ/download/",
+            "imageUrl": "js.jpg",
             "slug": "javascript-kursu",
-            "date": date(2024,10,22),
-            "isActive": False
+            "date": date(2024,11,22),
+            "isActive": True,
+            "isUpdated": True
         },
         {
             "title": "python kursu",
             "description": "python kurs açıklaması",
-            "imageUrl": "https://ciracollege.com/wp-content/uploads/2020/11/How-to-Learn-Python.jpg",
+            "imageUrl": "python.jpg",
             "slug": "python-kursu",
-            "date": date(2024,10,9),
-            "isActive": True
+            "date": date(2024,10,5),
+            "isActive": True,
+            "isUpdated": True
 
         },
         {
             "title": "web geliştirme kursu",
             "description": "web geliştirme kurs açıklaması",
-            "imageUrl": "https://astrodijital.com/wp-content/uploads/2023/09/1_aBiTrlX_FBSAaht89MoL-Q.png",
+            "imageUrl": "html.jpg",
             "slug": "web-gelistirme-kursu",
             "date": date(2024,9,10),
-            "isActive": True
+            "isActive": True,
+            "isUpdated": False
+
         }
     ],
     "categories": [
@@ -45,7 +49,7 @@ db = {
 }
 
 def index(request):
-    courses = db["courses"]
+    courses = [course for course in db["courses"] if course["isActive"] == True]
     categories = db["categories"]
 
     return render(request, 'courses/index.html', {
