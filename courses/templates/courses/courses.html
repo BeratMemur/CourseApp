@@ -1,12 +1,17 @@
 {% extends "layout.html" %}
-
+{% load static %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href= {% static "courses/css/style.css" %}>
 {% endblock %}
 
 
-{% block document %}
+{% block js_files %}
+    <script src="{% static "courses/js/script.js" %}"></script>
+{% endblock %}
+
+
+{% block page_title %}
     Kurslar
 {% endblock %}
 
@@ -23,4 +28,3 @@
 {% endblock %}
 
 
-{% block js_files %}{% endblock %}
