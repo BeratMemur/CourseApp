@@ -1,51 +1,13 @@
 from datetime import date
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import Http404, HttpResponseNotFound
+from django.http import HttpResponseNotFound
 from django.urls import reverse
 from .models import Course, Category
+
 data = {
     "programlama": "Programlama kategorisine ait kurslar",
     "web-gelistirme": "Web geliştrime kategorisine ait kurslar",
     "mobil": "Mobil kategorisine ait kurslar"
-}
-
-db = {
-    "courses": [
-        {
-            "title": "javascript kursu",
-            "description": "javascript kurs açıklaması",
-            "imageUrl": "js.jpg",
-            "slug": "javascript-kursu",
-            "date": date(2024,11,22),
-            "isActive": True,
-            "isUpdated": True
-        },
-        {
-            "title": "python kursu",
-            "description": "python kurs açıklaması",
-            "imageUrl": "python.jpg",
-            "slug": "python-kursu",
-            "date": date(2024,10,5),
-            "isActive": True,
-            "isUpdated": True
-
-        },
-        {
-            "title": "web geliştirme kursu",
-            "description": "web geliştirme kurs açıklaması",
-            "imageUrl": "html.jpg",
-            "slug": "web-gelistirme-kursu",
-            "date": date(2024,9,10),
-            "isActive": True,
-            "isUpdated": False
-
-        }
-    ],
-    "categories": [
-        {"id": 1, "name":"programlama", "slug": "programlama"},
-        {"id": 2, "name":"web geliştirme", "slug": "web-gelistirme"},
-        {"id": 3, "name":"mobil uygulamalar", "slug": "mobil"},
-    ]
 }
 
 def index(request):
@@ -58,8 +20,8 @@ def index(request):
     })
 
 
-def details(request, course_id):
-    course = get_object_or_404(Course, pk=course_id)
+def details(request, slug):
+    course = get_object_or_404(Course, slug=slug)
     context = {
         'course': course
     }
