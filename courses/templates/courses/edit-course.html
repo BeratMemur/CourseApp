@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+
+{% block css_files %}
+    <link rel="stylesheet" href= {% static "courses/css/style.css" %}>
+{% endblock %}
+
+
+{% block js_files %}
+    <script src="{% static "courses/js/script.js" %}"></script>
+{% endblock %}
+
+
+{% block page_title %}
+    Edit Course
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ msg }}
+                </div>
+            {% endif %}
+            <form method="POST" novalidate>
+                {% csrf_token %}
+                <h2 class="mb-3">Kurs Ekle</h2>
+
+
+                {% for field in form %}
+                    <div class="mb-3 {% if form.title.errors %} invalid {% endif %}">
+                        {% if field.errors %}
+                            {{ field.errors }}
+                        {% endif %}
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+
+                
+                <button class="btn btn-primary" type="submit">Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

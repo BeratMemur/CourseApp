@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from courses.forms import CourseCreateForm, CourseEditForm
 from .models import Course, Category
 from django.core.paginator import Paginator
 
@@ -24,6 +25,56 @@ def search(request):
         'courses': courses,
         'categories': categories,
     })
+
+
+def create_course(request):
+    if request.method == "POST":
+        form = CourseCreateForm(request.POST)
+
+
+        if form.is_valid():
+            form.save()
+            return redirect("/courses")
+    else:
+        form = CourseCreateForm()
+    return render(request, "courses/create-course.html", {"form":form})
+
+
+def course_list(request):
+    courses = Course.objects.all()
+    return render(request, 'courses/course-list.html', {
+        'courses': courses,
+    })
+
+
+def course_edit(request, id):
+    course = get_object_or_404(Course, pk=id)
+
+    if request.method == "POST":
+        form = CourseEditForm(request.POST, instance=course)
+        form.save()
+        return redirect("course_list")
+    else:
+        form = CourseEditForm(instance=course)
+
+    return render(request, "courses/edit-course.html", {"form":form})
+
+
+def course_delete(request, id):
+    course = get_object_or_404(Course, pk=id)
+
+    if request.method == "POST":
+        course.delete()
+        return redirect("course_list")
+
+    return render(request, "courses/delete-course.html", {"course": course})
+
+
+def upload(request):
+    if request.method == "POST":
+        uploadedImage = request.FILES['image']
+        return render(request, "courses/success.html")
+    return render(request, "courses/upload.html")
 
 
 def details(request, slug):

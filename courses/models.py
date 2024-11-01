@@ -20,7 +20,7 @@ class Course(models.Model):
     date = models.DateField(auto_now=True)
     isActive = models.BooleanField(default=False)
     isHome = models.BooleanField(default=False)
-    isUpdated = models.BooleanField()
+    isUpdated = models.BooleanField(default=True)
     slug = models.SlugField(default="", blank=True, unique=True, db_index=True)
     categories = models.ManyToManyField(Category)
 
