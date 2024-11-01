@@ -3,10 +3,10 @@ from .models import Course, Category
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ("title", "date", "isActive", "isUpdated", "category_list",)
+    list_display = ("title", "date", "isActive", "isHome", "isUpdated", "category_list",)
     prepopulated_fields = {"slug": ("title",),}
-    list_filter = ("isUpdated", "isActive",)
-    list_editable = ("isActive", "isUpdated",)
+    list_filter = ("isUpdated", "isActive", "isHome",)
+    list_editable = ("isActive", "isUpdated", "isHome",)
     search_fields = ("title", "description",)
 
     def category_list(self, course):
