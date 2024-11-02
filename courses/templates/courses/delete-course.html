@@ -24,7 +24,7 @@
             <p>
                 <strong>{{ course.title }} isimli kursu silmek istediğinize emin misiniz?</strong>
 
-                <form action="" method="post">
+                <form method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Evet</button>
                     <a href="{% url "course_list" %}" class="btn btn-primary">Hayır</a>

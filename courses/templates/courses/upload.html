@@ -21,12 +21,12 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-12">
-            <form action="{% url "upload_image" %}" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="input-group">
-                    <input type="file" class="form-control" id="uploadImage" name="image">
+                    {{ form }}
                     <button class="btn btn-outline-secondary" type="submit">Yükle</button>
-                  </div>
+                </div>
             </form>
         </div>
     </div>

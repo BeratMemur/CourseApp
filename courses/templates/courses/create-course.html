@@ -27,7 +27,7 @@
                     {{ msg }}
                 </div>
             {% endif %}
-            <form method="POST" novalidate>
+            <form method="post" novalidate enctype="multipart/form-data">
                 {% csrf_token %}
                 <h2 class="mb-3">Kurs Ekle</h2>
 

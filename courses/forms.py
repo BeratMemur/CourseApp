@@ -1,10 +1,10 @@
-from django.forms import ModelForm, SelectMultiple, TextInput, Textarea, CheckboxInput
+from django import forms
 from courses.models import Course
 
-class CourseCreateForm(ModelForm):
+class CourseCreateForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ('title', 'description', 'imageUrl')
+        fields = ('title', 'description', 'image')
         labels = {
             "title": "Başlık",
             "description": "Açıklama",
@@ -12,9 +12,8 @@ class CourseCreateForm(ModelForm):
         }
 
         widgets = {
-            "title": TextInput(attrs={"class":"form-control"}),
-            "description": Textarea(attrs={"class":"form-control"}),
-            "imageUrl": TextInput(attrs={"class":"form-control"}),
+            "title": forms.TextInput(attrs={"class":"form-control"}),
+            "description": forms.Textarea(attrs={"class":"form-control"}),
         }
 
         error_messages = {
@@ -28,14 +27,14 @@ class CourseCreateForm(ModelForm):
         }
 
 
-class CourseEditForm(ModelForm):
+class CourseEditForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = "__all__"
         labels = {
             "title": "Başlık",
             "description": "Açıklama",
-            "imageUrl": "Görsel-Url",
+            "image": "Görsel-Url",
             "isActive": "Aktif mi?",
             "isHome": "Anasayfada gösterilsin mi?",
             "isUpdated": "Güncel mi?",
@@ -43,13 +42,12 @@ class CourseEditForm(ModelForm):
         }
 
         widgets = {
-            "title": TextInput(attrs={"class":"form-control"}),
-            "description": Textarea(attrs={"class":"form-control"}),
-            "imageUrl": TextInput(attrs={"class":"form-control"}),
-            "isActive": CheckboxInput(attrs={"class":"form-check-input"}),
-            "isHome": CheckboxInput(attrs={"class":"form-check-input"}),
-            "isUpdated": CheckboxInput(attrs={"class":"form-check-input"}),
-            "categories": SelectMultiple(attrs={"class":"form-control"}),
+            "title": forms.TextInput(attrs={"class":"form-control"}),
+            "description": forms.Textarea(attrs={"class":"form-control"}),
+            "isActive": forms.CheckboxInput(attrs={"class":"form-check-input"}),
+            "isHome": forms.CheckboxInput(attrs={"class":"form-check-input"}),
+            "isUpdated": forms.CheckboxInput(attrs={"class":"form-check-input"}),
+            "categories": forms.SelectMultiple(attrs={"class":"form-control"}),
         }
 
         error_messages = {
@@ -61,3 +59,8 @@ class CourseEditForm(ModelForm):
                 "required": "Açıklama alanı boş olamaz."
             }
         }
+
+
+class UploadForm(forms.Form):
+    image = forms.ImageField()
+
