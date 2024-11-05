@@ -31,18 +31,8 @@
                 {% csrf_token %}
                 <h2 class="mb-3">Kurs Ekle</h2>
 
+                {% include "partials/_form.html" %}
 
-                {% for field in form %}
-                    <div class="mb-3 {% if form.title.errors %} invalid {% endif %}">
-                        {% if field.errors %}
-                            {{ field.errors }}
-                        {% endif %}
-                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        {{ field }}
-                    </div>
-                {% endfor %}
-
-                
                 <button class="btn btn-primary" type="submit">Kaydet</button>
             </form>
         </div>

@@ -8,7 +8,7 @@ class CourseCreateForm(forms.ModelForm):
         labels = {
             "title": "Başlık",
             "description": "Açıklama",
-            "imageUrl": "Görsel-Url"
+            "image": "Görsel"
         }
 
         widgets = {
