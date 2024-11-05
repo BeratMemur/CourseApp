@@ -8,7 +8,7 @@
 
 
 {% block js_files %}
-    <script src="{% static "pages/js/script.js" %}"></script>
+    <script src="{% static "pages/js/bootstrap.min.js" %}"></script>
 {% endblock %}
 
 
@@ -20,9 +20,23 @@
 {% block content %}
 <div class="container mt-3">
     <div class="row">
-        <div class="col-12">
-            <h1>Anasayfa</h1>
-        </div>
+        <center>
+            <div class="col-9">
+                {% include "pages/partials/_slider.html" %}
+            </div>
+        </center>
+    </div>
+</div>
+
+
+<center><hr width="1500px" ></center>
+<br>
+
+<div class="container mt-3">
+    <div class="row row-cols-2 row-cols-md-3 g-4">
+            {% for course in courses %}
+                {% include "pages/partials/_card.html" %}
+            {% endfor %}
     </div>
 </div>
 {% endblock%}

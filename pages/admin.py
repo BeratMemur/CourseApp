@@ -1,3 +1,6 @@
 from django.contrib import admin
+from pages.models import Slider
 
-# Register your models here.
+@admin.register(Slider)
+class SliderAdmin(admin.ModelAdmin):
+    list_display = ("title","course",)

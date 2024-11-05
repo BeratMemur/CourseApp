@@ -22,31 +22,32 @@
                     </li>
                 {% endif %}
             </ul>
-            <form class="d-flex me-3" action="{% url "search" %}">
-                <input class="form-control me-1" type="text" name="q" placeholder="Arama" >
-                <button class="btn btn-light" type="submit">Ara</button>
-            </form>
-
+            
             <ul class="navbar-nav me-2">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a href="{% url "user_logout" %}" class="nav-link">Çıkış Yap</a>
                     </li>
                     <li class="nav-item">
+                        <a href="{% url "change_password" %}" class="nav-link">Şifre Güncelle</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link">{{user.username}}</a>
                     </li>
-                {% else %}
+                    {% else %}
                     <li class="nav-item">
                         <a href="{% url "user_login" %}" class="nav-link">Giriş Yap</a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url "user_register" %}" class="nav-link">Kayıt Ol</a>
                     </li>
-                {% endif %}
-            </ul>
-
-
-
+                    {% endif %}
+                </ul>
+                
+                <form class="d-flex me-3" action="{% url "search" %}">
+                    <input class="form-control me-1" type="text" name="q" placeholder="Arama" >
+                    <button class="btn btn-light" type="submit">Ara</button>
+                </form>
 
         </div>
     </div>

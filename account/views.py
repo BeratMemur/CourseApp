@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
-from account.fomrs import LoginUserForm
+from account.fomrs import ChangePasswordForm, LoginUserForm, NewUserForm
+from django.contrib.auth.forms import PasswordChangeForm
 
 def user_login(request):
     if request.user.is_authenticated and "next" in request.GET:
@@ -34,41 +34,37 @@ def user_login(request):
 
 def user_register(request):
     if request.method == "POST":
-        email = request.POST["email"]
-        username = request.POST["username"]
-        password = request.POST["password"]
-        repassword = request.POST["repassword"]
+        form = NewUserForm(request.POST)
 
-        if password != repassword:
-            return render(request, "account/register.html",
-            {
-                "error":"Parolalar Eşleşmiyor",
-                "email":email,
-                "username":username,
-            })
-        
-        if User.objects.filter(username = username).exists():
-            return render(request, "account/register.html",
-            {
-                "error":"Kullanıcı adı zaten kullanılıyor",
-                "email":email,
-                "username":username,
-            })
-        
-        if User.objects.filter(email = email).exists():
-            return render(request, "account/register.html",
-            {
-                "error":"Bu email ile zaten bir hesap açılmış.",
-                "email":email,
-                "username":username,
-            })
-        
-        user = User.objects.create_user(username = username, email = email, password = password)
-        user.save()
-        return redirect("user_login")
+        if form.is_valid():
+            form.save()
+
+            username = form.cleaned_data["username"] 
+            password = form.cleaned_data["password1"]
+            user = authenticate(request, username=username, password = password)
+            login(request, user)
+            return redirect("home")
+        else:
+            return render(request, "account/register.html", {"form": form})
+    else:
+        form = NewUserForm()
+        return render(request, "account/register.html", {"form": form})
+
+
+def change_password(request):
+    if request.method == "POST":
+        form = ChangePasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, "Parola Güncellendi")
+            return redirect("change_password")
+        else:
+            return render(request, "account/change-password.html", {"form": form})
 
     else:
-        return render(request, "account/register.html")
+        form = ChangePasswordForm(request.user)
+        return render(request, "account/change-password.html", {"form": form})
 
 def user_logout(request):
     logout(request)

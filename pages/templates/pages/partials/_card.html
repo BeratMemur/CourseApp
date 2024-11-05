@@ -1,0 +1,13 @@
+{% load static %}
+
+<div class="col">
+    <a href="/courses/{{ course.slug }}" style="color:black; text-decoration:none;">
+        <div class="card">
+            <img src="{{ course.image.url }}" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title">{{ course.title }}</h5>
+                <p class="card-text">{{ course.description|truncatechars:50|safe }}</p>
+            </div>
+        </div>
+    </a>
+</div>

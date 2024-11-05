@@ -1,8 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from courses.models import Course
+from pages.models import Slider
 
 def index(request):
-    return render(request, 'pages/index.html')
+    slider = Slider.objects.filter(isActive=1)
+    courses = Course.objects.filter(isActive=1, isHome=1)
+
+    return render(request, 'pages/index.html',{
+        "slider": slider,
+        "courses":courses,
+    })
+
 
 def contact(request):
     return render(request, 'pages/contact.html')
